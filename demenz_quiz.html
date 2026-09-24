@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demenz Quiz</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f3f7fb;margin:0;padding:20px;color:#222}
+.quiz{max-width:600px;margin:auto;background:white;padding:24px;border-radius:18px;box-shadow:0 4px 18px #0001}
+h1{text-align:center;color:#245b8a}
+#frage{font-size:22px;font-weight:bold;margin:25px 0}
+button{display:block;width:100%;padding:15px;margin:10px 0;border:0;border-radius:12px;background:#e8eef5;font-size:17px;cursor:pointer}
+button:hover{background:#d8e5f0}
+.feedback{padding:14px;border-radius:10px;margin-top:15px;font-weight:bold}
+.next{background:#245b8a;color:white}
+.hidden{display:none}
+#score{text-align:center;font-size:24px}
+</style>
+</head>
+<body>
+<div class="quiz">
+<h1>🧠 Demenz Quiz</h1>
+<p id="nummer"></p>
+<div id="frage"></div>
+<div id="antworten"></div>
+<div id="feedback" class="feedback hidden"></div>
+<button id="next" class="next hidden" onclick="naechsteFrage()">Nächste Frage</button>
+<div id="ende" class="hidden">
+<h2 id="score"></h2>
+<button onclick="start()">Quiz wiederholen</button>
+</div>
+</div>
+
+<script>
+const fragen=[
+{f:"Was ist Demenz?",a:["Eine Gruppe von Erkrankungen, die Gedächtnis und Denken beeinträchtigen","Eine Knochenkrankheit","Eine Hautkrankheit","Eine Augenkrankheit"],r:0},
+{f:"Welches Symptom ist bei Demenz häufig?",a:["Gedächtnisprobleme","Gebrochener Arm","Zahnschmerzen","Sonnenbrand"],r:0},
+{f:"Was ist bei Menschen mit Demenz wichtig?",a:["Geduld und Verständnis","Lautes Anschreien","Immer widersprechen","Die Person ignorieren"],r:0},
+{f:"Was kann bei Demenz Orientierung unterstützen?",a:["Uhren, Kalender und Beschilderungen","Dunkle Räume","Keine Informationen","Laute Musik"],r:0},
+{f:"Was bedeutet Biografiearbeit?",a:["Die Lebensgeschichte einer Person berücksichtigen","Medikamente wechseln","Blutdruck messen","Essen kochen"],r:0},
+{f:"Was kann Menschen mit Demenz Sicherheit geben?",a:["Ein vertrauter Tagesablauf","Ständige Veränderungen","Unbekannte Umgebung","Zeitdruck"],r:0},
+{f:"Wie sollte man mit einer Person mit Demenz sprechen?",a:["Ruhig und einfach","Sehr schnell","Sehr laut und aggressiv","Nur mit Fachbegriffen"],r:0},
+{f:"Was kann ein Beschäftigungsangebot sein?",a:["Gemeinsam Musik hören","Die Person allein lassen","Ständig schlafen lassen","Nur Medikamente geben"],r:0},
+{f:"Was ist bei der Pflege wichtig?",a:["Die Selbstständigkeit fördern","Alles für die Person entscheiden","Die Person ausgrenzen","Nie zuhören"],r:0},
+{f:"Was kann bei Demenz Orientierung geben?",a:["Ein gut sichtbarer Kalender","Versteckte Gegenstände","Unklare Anweisungen","Ständige Ortswechsel"],r:0},
+{f:"Was ist ein Ziel der Validation?",a:["Gefühle und die Person ernst nehmen","Die Person korrigieren","Die Person beschämen","Die Person ignorieren"],r:0},
+{f:"Warum ist Bewegung wichtig?",a:["Sie kann Wohlbefinden und Gesundheit unterstützen","Sie verursacht immer Demenz","Sie ist grundsätzlich verboten","Sie ersetzt alle Medikamente"],r:0},
+{f:"Was sollte man bei Unruhe versuchen?",a:["Ruhig bleiben und nach der Ursache suchen","Sofort anschreien","Die Person bestrafen","Die Person allein lassen"],r:0},
+{f:"Was ist bei der Ernährung wichtig?",a:["Ausreichend trinken und ausgewogen essen","Trinken verbieten","Mahlzeiten immer auslassen","Nur Süßigkeiten geben"],r:0},
+{f:"Was ist ein wichtiger Grundsatz in der Demenzpflege?",a:["Würde und Respekt erhalten","Die Person nicht ernst nehmen","Entscheidungen immer abnehmen","Kontakt vermeiden"],r:0}
+];
+let i=0,punkte=0;
+
+function start(){i=0;punkte=0;document.getElementById("ende").classList.add("hidden");zeige();}
+function zeige(){
+document.getElementById("nummer").textContent=`Frage ${i+1} von ${fragen.length}`;
+document.getElementById("frage").textContent=fragen[i].f;
+const box=document.getElementById("antworten"); box.innerHTML="";
+document.getElementById("feedback").className="feedback hidden";
+document.getElementById("next").classList.add("hidden");
+fragen[i].a.forEach((x,n)=>{let b=document.createElement("button");b.textContent=`${String.fromCharCode(65+n)}) ${x}`;b.onclick=()=>antwort(n);box.appendChild(b);});
+}
+function antwort(n){
+const buttons=document.querySelectorAll("#antworten button");buttons.forEach(b=>b.disabled=true);
+const fb=document.getElementById("feedback");
+if(n===fragen[i].r){punkte++;fb.textContent="✅ Richtig!";fb.style.background="#d9f5df";}else{fb.textContent=`❌ Falsch! Die richtige Antwort ist: ${String.fromCharCode(65+fragen[i].r)}) ${fragen[i].a[fragen[i].r]}`;fb.style.background="#ffe0e0";}
+fb.classList.remove("hidden");
+if(i<fragen.length-1)document.getElementById("next").classList.remove("hidden");
+else setTimeout(ende,700);
+}
+function naechsteFrage(){i++;zeige();}
+function ende(){document.getElementById("frage").textContent="Quiz beendet!";document.getElementById("nummer").textContent="";document.getElementById("antworten").innerHTML="";document.getElementById("feedback").classList.add("hidden");document.getElementById("next").classList.add("hidden");document.getElementById("score").textContent=`Dein Ergebnis: ${punkte} / ${fragen.length}`;document.getElementById("ende").classList.remove("hidden");}
+start();
+</script>
+</body>
+</html>
