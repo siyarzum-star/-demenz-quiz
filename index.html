@@ -33,22 +33,96 @@ button:hover{background:#d8e5f0}
 </div>
 
 <script>
-const fragen=[
-{f:"Was ist Demenz?",a:["Eine Gruppe von Erkrankungen, die Gedächtnis und Denken beeinträchtigen","Eine Knochenkrankheit","Eine Hautkrankheit","Eine Augenkrankheit"],r:0},
-{f:"Welches Symptom ist bei Demenz häufig?",a:["Gedächtnisprobleme","Gebrochener Arm","Zahnschmerzen","Sonnenbrand"],r:0},
-{f:"Was ist bei Menschen mit Demenz wichtig?",b:["Geduld und Verständnis","Lautes Anschreien","Immer widersprechen","Die Person ignorieren"],r:0},
-{f:"Was kann bei Demenz Orientierung unterstützen?",c:["Uhren, Kalender und Beschilderungen","Dunkle Räume","Keine Informationen","Laute Musik"],r:0},
-{f:"Was bedeutet Biografiearbeit?",c:["Die Lebensgeschichte einer Person berücksichtigen","Medikamente wechseln","Blutdruck messen","Essen kochen"],r:0},
-{f:"Was kann Menschen mit Demenz Sicherheit geben?",a:["Ein vertrauter Tagesablauf","Ständige Veränderungen","Unbekannte Umgebung","Zeitdruck"],r:0},
-{f:"Wie sollte man mit einer Person mit Demenz sprechen?",a:["Ruhig und einfach","Sehr schnell","Sehr laut und aggressiv","Nur mit Fachbegriffen"],r:0},
-{f:"Was kann ein Beschäftigungsangebot sein?",b:["Gemeinsam Musik hören","Die Person allein lassen","Ständig schlafen lassen","Nur Medikamente geben"],r:0},
-{f:"Was ist bei der Pflege wichtig?",a:["Die Selbstständigkeit fördern","Alles für die Person entscheiden","Die Person ausgrenzen","Nie zuhören"],r:0},
-{f:"Was kann bei Demenz Orientierung geben?",c:["Ein gut sichtbarer Kalender","Versteckte Gegenstände","Unklare Anweisungen","Ständige Ortswechsel"],r:0},
-{f:"Was ist ein Ziel der Validation?",a:["Gefühle und die Person ernst nehmen","Die Person korrigieren","Die Person beschämen","Die Person ignorieren"],r:0},
-{f:"Warum ist Bewegung wichtig?",c:["Sie kann Wohlbefinden und Gesundheit unterstützen","Sie verursacht immer Demenz","Sie ist grundsätzlich verboten","Sie ersetzt alle Medikamente"],r:0},
-{f:"Was sollte man bei Unruhe versuchen?",c:["Ruhig bleiben und nach der Ursache suchen","Sofort anschreien","Die Person bestrafen","Die Person allein lassen"],r:0},
-{f:"Was ist bei der Ernährung wichtig?",a:["Ausreichend trinken und ausgewogen essen","Trinken verbieten","Mahlzeiten immer auslassen","Nur Süßigkeiten geben"],r:0},
-{f:"Was ist ein wichtiger Grundsatz in der Demenzpflege?",a:["Würde und Respekt erhalten","Die Person nicht ernst nehmen","Entscheidungen immer abnehmen","Kontakt vermeiden"],r:0}
+hconst fragen=[
+{f:"Was ist Demenz?",a:[
+"Eine Knochenkrankheit",
+"Eine Gruppe von Erkrankungen, die Gedächtnis und Denken beeinträchtigen",
+"Eine Hautkrankheit",
+"Eine Augenkrankheit"],r:1},
+
+{f:"Welches Symptom ist bei Demenz häufig?",a:[
+"Gebrochener Arm",
+"Sonnenbrand",
+"Zahnschmerzen",
+"Gedächtnisprobleme"],r:3},
+
+{f:"Was ist bei Menschen mit Demenz wichtig?",a:[
+"Geduld und Verständnis",
+"Immer widersprechen",
+"Lautes Anschreien",
+"Die Person ignorieren"],r:0},
+
+{f:"Was kann bei Demenz Orientierung unterstützen?",a:[
+"Dunkle Räume",
+"Laute Musik",
+"Uhren, Kalender und Beschilderungen",
+"Keine Informationen"],r:2},
+
+{f:"Was bedeutet Biografiearbeit?",a:[
+"Medikamente wechseln",
+"Die Lebensgeschichte einer Person berücksichtigen",
+"Blutdruck messen",
+"Essen kochen"],r:1},
+
+{f:"Was kann Menschen mit Demenz Sicherheit geben?",a:[
+"Unbekannte Umgebung",
+"Ständige Veränderungen",
+"Zeitdruck",
+"Ein vertrauter Tagesablauf"],r:3},
+
+{f:"Wie sollte man mit einer Person mit Demenz sprechen?",a:[
+"Ruhig und einfach",
+"Sehr laut und aggressiv",
+"Sehr schnell",
+"Nur mit Fachbegriffen"],r:0},
+
+{f:"Was kann ein Beschäftigungsangebot sein?",a:[
+"Die Person allein lassen",
+"Ständig schlafen lassen",
+"Gemeinsam Musik hören",
+"Nur Medikamente geben"],r:2},
+
+{f:"Was ist bei der Pflege wichtig?",a:[
+"Die Person ausgrenzen",
+"Nie zuhören",
+"Alles für die Person entscheiden",
+"Die Selbstständigkeit fördern"],r:3},
+
+{f:"Was kann bei Demenz Orientierung geben?",a:[
+"Ein gut sichtbarer Kalender",
+"Versteckte Gegenstände",
+"Unklare Anweisungen",
+"Ständige Ortswechsel"],r:0},
+
+{f:"Was ist ein Ziel der Validation?",a:[
+"Die Person korrigieren",
+"Die Person beschämen",
+"Gefühle und die Person ernst nehmen",
+"Die Person ignorieren"],r:2},
+
+{f:"Warum ist Bewegung wichtig?",a:[
+"Sie ersetzt alle Medikamente",
+"Sie kann Wohlbefinden und Gesundheit unterstützen",
+"Sie ist grundsätzlich verboten",
+"Sie verursacht immer Demenz"],r:1},
+
+{f:"Was sollte man bei Unruhe versuchen?",a:[
+"Sofort anschreien",
+"Die Person bestrafen",
+"Die Person allein lassen",
+"Ruhig bleiben und nach der Ursache suchen"],r:3},
+
+{f:"Was ist bei der Ernährung wichtig?",a:[
+"Ausreichend trinken und ausgewogen essen",
+"Nur Süßigkeiten geben",
+"Trinken verbieten",
+"Mahlzeiten immer auslassen"],r:0},
+
+{f:"Was ist ein wichtiger Grundsatz in der Demenzpflege?",a:[
+"Die Person nicht ernst nehmen",
+"Entscheidungen immer abnehmen",
+"Würde und Respekt erhalten",
+"Kontakt vermeiden"],r:2}
 ];
 let i=0,punkte=0;
 
